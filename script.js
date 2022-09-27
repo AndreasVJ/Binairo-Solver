@@ -1,38 +1,37 @@
+const sizeSlider = document.getElementById("sizeSlider")
+const sizeText = document.getElementById("sizeText")
+
+const smartSolveBtn = document.getElementById("smartSolveBtn")
+const bruteSolveBtn = document.getElementById("bruteSolveBtn")
+
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
 canvas.width = window.innerHeight * 0.7
 canvas.height = window.innerHeight * 0.7
 
-const size = 14
+let size, lineWidth, tileSize, grid
 
-const lineWidth = canvas.width / (size*10)
-const tileSize = (canvas.width - lineWidth*(size+1)) / size
+function resize() {
+    size = parseInt(sizeSlider.value)
+    sizeText.innerText = "Size: " + size
 
-const grid = [
- [2, 2, 1, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2]
-,[1, 2, 2, 2, 0, 2, 2, 2, 1, 2, 2, 2, 2, 1]
-,[2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-,[0, 2, 2, 2, 0, 2, 2, 0, 1, 2, 0, 2, 2, 2]
-,[2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 1, 2]
-,[2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2]
-,[2, 0, 2, 2, 2, 2, 1, 2, 2, 0, 2, 2, 2, 2]
-,[2, 0, 0, 2, 2, 2, 1, 2, 0, 2, 2, 2, 2, 2]
-,[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 0]
-,[2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2]
-,[0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2]
-,[2, 1, 1, 2, 2, 2, 2, 0, 2, 2, 2, 1, 2, 2]
-,[2, 2, 1, 2, 2, 0, 2, 0, 2, 2, 1, 1, 2, 2]
-,[1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2]]
 
-// for (let i = 0; i < size; i++) {
-//     const row = []
-//     for (let j = 0; j < size; j++) {
-//         row.push(2)
-//     }
-//     grid.push(row)
-// }
+    lineWidth = canvas.width / (size*10)
+    tileSize = (canvas.width - lineWidth*(size+1)) / size
+}
 
+
+function createGrid() {
+    grid = []
+    for (let i = 0; i < size; i++) {
+        const row = []
+        for (let j = 0; j < size; j++) {
+            row.push(2)
+        }
+        grid.push(row)
+    }
+}
 
 function draw() {
 
@@ -55,7 +54,15 @@ function draw() {
     }
 }
 
+resize()
+createGrid()
 draw()
+
+sizeSlider.oninput = () => {
+    resize()
+    createGrid()
+    draw()
+}
 
 canvas.addEventListener("click", event => {
     const x = Math.floor(event.offsetX/(tileSize+lineWidth))
@@ -174,7 +181,7 @@ function bruteSolve() {
 }
 
 
-function solve() {
+function smartSolve() {
 
     for (y = 0; y < size; y++) {
         for (x = 0; x < size; x++) {
@@ -288,3 +295,6 @@ function solve() {
 
     draw()
 }
+
+smartSolveBtn.onclick = smartSolve
+bruteSolveBtn.onclick = bruteSolve
