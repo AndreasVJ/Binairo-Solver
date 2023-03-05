@@ -1,14 +1,48 @@
 body {
     background-color: rgb(50, 50, 50);
     color: white;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
     height: 100vh;
 }
 
+/* #sizeContainer {
+    margin-bottom: 2rem;
+} */
+
 #sizeText {
     text-align: center;
+    font-size: 2rem;
+}
+
+.slider {
+    appearance: none;
+    width: 20vh;
+    height: 2vh;
+    border-radius: 2vh;
+    opacity: 0.7;
+}
+  
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 3vh;
+    height: 3vh;
+    border-radius: 50%; 
+    background: #25b3fa;
+    cursor: pointer;
+}
+
+button {
+    height: 10vh;
+    width: 20vh;
+    margin: 2vh;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    border-width: 5px;
+    border-color: black;
 }

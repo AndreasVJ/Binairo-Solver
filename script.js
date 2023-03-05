@@ -7,8 +7,8 @@ const bruteSolveBtn = document.getElementById("bruteSolveBtn")
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
-canvas.width = window.innerHeight * 0.7
-canvas.height = window.innerHeight * 0.7
+canvas.width = window.innerHeight * 0.6
+canvas.height = window.innerHeight * 0.6
 
 let size, lineWidth, tileSize, grid
 
@@ -176,7 +176,7 @@ function bruteSolve() {
     }
     draw()
     for (row of grid) {
-        console.log(row)
+        // console.log(row)
     }
 }
 
